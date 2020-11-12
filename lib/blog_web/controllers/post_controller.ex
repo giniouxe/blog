@@ -27,7 +27,15 @@ defmodule BlogWeb.PostController do
   end
 
   def show(conn, %{"id" => id}) do
+    start = System.monotonic_time()
     post = Posts.get_post!(id)
+
+    :telemetry.execute(
+      [:post, :show],
+      %{duration: System.monotonic_time() - start, post_id: id},
+      conn
+    )
+
     render(conn, "show.html", post: post)
   end
 

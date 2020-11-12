@@ -41,7 +41,11 @@ defmodule BlogWeb.Telemetry do
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),
       summary("vm.total_run_queue_lengths.cpu"),
-      summary("vm.total_run_queue_lengths.io")
+      summary("vm.total_run_queue_lengths.io"),
+
+      # Business metrics
+      counter("post.show.post_id"),
+      summary("post.show.duration", unit: {:native, :millisecond})
     ]
   end
 
